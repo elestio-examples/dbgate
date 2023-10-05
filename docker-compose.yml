@@ -1,0 +1,51 @@
+version: "3"
+services:
+  dbgate:
+    image: dbgate/dbgate
+    restart: always
+    ports:
+      - 172.17.0.1:54530:3000
+    volumes:
+      - ./storage/dbgate-data:/root/.dbgate
+    environment:
+      CONNECTIONS: con1
+      # If you have more than one connection, you can specify them like that:
+      # CONNECTIONS: con1,con2,con3,con4...
+
+      LABEL_con1: Postgres
+      SERVER_con1: postgres
+      USER_con1: ${${POSTGRES1_USER}}
+      PASSWORD_con1: ${POSTGRES1_PASSWORD}
+      PORT_con1: 5432
+      ENGINE_con1: postgres@dbgate-plugin-postgres
+
+      # Examples for other DB
+
+      # LABEL_con2: MySql
+      # SERVER_con2: mysql
+      # USER_con2: root
+      # PASSWORD_con2: TEST
+      # PORT_con2: 3306
+      # ENGINE_con2: mysql@dbgate-plugin-mysql
+
+      # LABEL_con3: MongoDB
+      # URL_con3: mongodb://mongo:27017
+      # ENGINE_con3: mongo@dbgate-plugin-mongo
+
+      # LABEL_con4: SQLite
+      # FILE_con4: /home/jan/feeds.sqlite
+      # ENGINE_con4: sqlite@dbgate-plugin-sqlite
+
+  postgres:
+    image: elestio/postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES1_DB}
+      POSTGRES_USER: ${POSTGRES1_USER}
+      POSTGRES_PASSWORD: ${POSTGRES1_PASSWORD}
+      PGDATA: /data/postgres
+      PGPORT: 5432
+    volumes:
+      - ./storage/pg1_data:/data/postgres
+    ports:
+      - 172.17.0.1:40211:5432
