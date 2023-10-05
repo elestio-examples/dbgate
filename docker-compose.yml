@@ -8,6 +8,8 @@ services:
     volumes:
       - ./storage/dbgate-data:/root/.dbgate
     environment:
+      LOGINS: admin
+      LOGIN_PASSWORD_admin: ${ADMIN_PASSWORD}
       CONNECTIONS: con1
       # If you have more than one connection, you can specify them like that:
       # CONNECTIONS: con1,con2,con3,con4...
