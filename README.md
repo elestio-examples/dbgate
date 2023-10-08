@@ -31,13 +31,11 @@ If you want to add a new db, follow these steps:
     USER_con2: root => login
     PASSWORD_con2: TEST => password
     PORT_con2: 3306 => port of the db
-    ENGINE_con2: mysql@dbgate-plugin-mysql => don't modify this
+    ENGINE_con2: mysql@dbgate-plugin-mysql => depend of your db, you can find engine value in the list of engines below
 
 **_step4_** Click on `Update & Restart`, your db will be shown in DbGate
 
-# Engine
-
-To use your db on DbGate you'll have to add your engine in environment variable. Here is what you need to add for each db:
+# Engines
 
     mssql@dbgate-plugin-mssql - Microsoft SQL Server
     mysql@dbgate-plugin-mysql - MySQL
